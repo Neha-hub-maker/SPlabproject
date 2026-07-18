@@ -3,8 +3,13 @@
 #include <cmath>
 
 Texture2D RedLightGreenLight::LoadSprite(const char* path) {
-    // PNGs already have transparency baked in by the build pipeline
-    Texture2D tex = LoadTexture(path);
+    const char* resolvedPath = path;
+    char buffer[256];
+    if (!FileExists(path)) {
+        snprintf(buffer, sizeof(buffer), "../%s", path);
+        resolvedPath = buffer;
+    }
+    Texture2D tex = LoadTexture(resolvedPath);
     if (tex.id > 0) {
         SetTextureFilter(tex, TEXTURE_FILTER_POINT);
     }
