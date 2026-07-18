@@ -6,7 +6,11 @@ inline Font& GetPixelFont() {
     static Font font = {0};
     static bool loaded = false;
     if (!loaded) {
-        font = LoadFont("assets/fonts/PressStart2P-Regular.ttf");
+        const char* path = "assets/fonts/PressStart2P-Regular.ttf";
+        if (!FileExists(path)) {
+            path = "../assets/fonts/PressStart2P-Regular.ttf";
+        }
+        font = LoadFont(path);
         SetTextureFilter(font.texture, TEXTURE_FILTER_POINT);
         loaded = true;
     }
