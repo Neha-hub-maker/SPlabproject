@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "raylib.h"
 #include "../levels/RedLightGreenLight.h"
+#include "../levels/Dalgona.h"
 
 void Game::Init() {
     state = GameState::MENU;
@@ -11,6 +12,8 @@ void Game::StartLevel(GameState levelState) {
     state = levelState;
     if (levelState == GameState::LEVEL_1)
         currentLevel = std::make_unique<RedLightGreenLight>();
+    else if (levelState == GameState::LEVEL_2)
+        currentLevel = std::make_unique<Dalgona>();
     if (currentLevel) currentLevel->Init();
 }
 
